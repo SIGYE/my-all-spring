@@ -1,5 +1,6 @@
 package com.linda.myspringapp.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,19 @@ public class FunRestController {
     @GetMapping("/")
     public String sayHello(){
         return "Hello World";
+    }
+
+    @Value("${person.name}")
+    public String personName;
+
+    @Value("${person.role}")
+    public String personRole;
+
+    //expose the injections
+
+    @GetMapping("/information")
+    public String getPersonInfo(){
+        return "Name: " +personName+ ", Role: " +personRole;
     }
 
     //expose a new endpoint for "workout"
